@@ -1,0 +1,53 @@
+{
+  "common": {
+    "siteName": "AI Tools Nav",
+    "siteDescription": "AI tools navigation for solopreneurs, cross-border e-commerce and content creators",
+    "search": "Search",
+    "searchPlaceholder": "Enter your question, e.g., How to generate product images?",
+    "home": "Home",
+    "category": "Category",
+    "about": "About",
+    "admin": "Admin",
+    "all": "All",
+    "hot": "Hot",
+    "recommended": "Recommended",
+    "new": "New",
+    "free": "Free",
+    "freemium": "Freemium",
+    "paid": "Paid",
+    "visit": "Visit",
+    "rating": "Rating"
+  },
+  "audience": {
+    "cn_opc": "CN OPC",
+    "cross_border": "Cross-border",
+    "content_creator": "Content Creator"
+  },
+  "home": {
+    "title": "Discover the Best AI Tools for You",
+    "subtitle": "Categorized by real business scenarios, find AI tools to solve your problems",
+    "hotTools": "Popular Tools",
+    "latestTools": "Latest Tools",
+    "categories": "Top 10 Categories"
+  },
+  "tool": {
+    "description": "Description",
+    "features": "Features",
+    "pricing": "Pricing",
+    "pricingDetail": "Pricing Details",
+    "language": "Languages",
+    "tags": "Tags",
+    "relatedTools": "Related Tools",
+    "workflow": "Workflow"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "import": "Excel Import",
+    "tools": "Tools",
+    "settings": "Settings",
+    "uploadExcel": "Upload Excel",
+    "downloadTemplate": "Download Template",
+    "importSuccess": "Import Successful",
+    "importFailed": "Import Failed"
+  }
+}

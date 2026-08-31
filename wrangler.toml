@@ -1,0 +1,23 @@
+name = "aiqury"
+main = ".open-next/worker.js"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[vars]
+NEXT_PUBLIC_SUPABASE_URL = "https://fmglqjgsgzqkpvzfuhnh.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtZ2xxamdzZ3pxa3B2emZ1aG5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1OTk4NzgsImV4cCI6MjEwMjE3NTg3OH0.caONqXYp_BeF7mC636lrk8Djpx4uUVGLGOJbzgnCQ2E"
+ADMIN_PASSWORD = "aiqury2024admin"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aiqury-db"
+database_id = "c5523847-81df-448f-b2bf-0a5ea8ed6ab9"
+
+[[kv_namespaces]]
+binding = "TRACK_CONFIG"
+id = "2857ada83cfa496e902ced8be06825f2"

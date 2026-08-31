@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" fill="none">
+  <!-- Icon part -->
+  <g stroke="#0E3A7A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="5" y="5" width="68" height="68" rx="10" ry="10"/>
+    <path d="M 12 24 L 12 17 Q 12 13 16 13 L 23 13"/>
+    <path d="M 55 13 L 62 13 Q 66 13 66 17 L 66 24"/>
+    <path d="M 66 54 L 66 61 Q 66 65 62 65 L 55 65"/>
+    <path d="M 23 65 L 16 65 Q 12 65 12 61 L 12 54"/>
+    <path d="M 28 62 L 39 22 L 50 62"/>
+    <path d="M 33 44 L 45 44"/>
+    <circle cx="44" cy="40" r="18"/>
+    <path d="M 55 52 L 62 59"/>
+  </g>
+  <!-- Text part -->
+  <text x="90" y="48" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="32" fill="#0E3A7A">aiqury.com</text>
+  <text x="92" y="68" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="14" fill="#6B7280">Find AI Tools By Your Questions</text>
+</svg>

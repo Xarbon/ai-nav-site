@@ -1,0 +1,53 @@
+{
+  "common": {
+    "siteName": "AI工具导航",
+    "siteDescription": "面向一人公司、跨境电商和自媒体的AI工具导航",
+    "search": "搜索",
+    "searchPlaceholder": "输入你的问题，如：怎么生成商品主图？",
+    "home": "首页",
+    "category": "分类",
+    "about": "关于",
+    "admin": "后台",
+    "all": "全部",
+    "hot": "热门",
+    "recommended": "推荐",
+    "new": "新品",
+    "free": "免费",
+    "freemium": "免费增值",
+    "paid": "付费",
+    "visit": "立即使用",
+    "rating": "评分"
+  },
+  "audience": {
+    "cn_opc": "大陆OPC",
+    "cross_border": "跨境电商",
+    "content_creator": "自媒体"
+  },
+  "home": {
+    "title": "发现最适合你的AI工具",
+    "subtitle": "按真实业务场景分类，一键找到解决问题的AI工具",
+    "hotTools": "热门推荐",
+    "latestTools": "最新收录",
+    "categories": "十大赛道"
+  },
+  "tool": {
+    "description": "工具描述",
+    "features": "功能特点",
+    "pricing": "定价",
+    "pricingDetail": "定价详情",
+    "language": "支持语言",
+    "tags": "标签",
+    "relatedTools": "同类工具",
+    "workflow": "所属工作流"
+  },
+  "admin": {
+    "dashboard": "仪表盘",
+    "import": "Excel导入",
+    "tools": "工具管理",
+    "settings": "设置",
+    "uploadExcel": "上传Excel",
+    "downloadTemplate": "下载模板",
+    "importSuccess": "导入成功",
+    "importFailed": "导入失败"
+  }
+}

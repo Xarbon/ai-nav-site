@@ -1,0 +1,154 @@
+{
+  "categories": [
+    {
+      "slug": "ecommerce",
+      "name": "电商赛道",
+      "name_en": "E-commerce",
+      "description": "商品主图、Listing翻译、客服自动化",
+      "sort_order": 1,
+      "sub_categories": [
+        {"slug": "product-image", "name": "怎么生成商品主图/白底图？"},
+        {"slug": "product-video", "name": "如何一键生成产品短视频？"},
+        {"slug": "listing-title", "name": "怎么写跨境产品标题/五点描述？"},
+        {"slug": "listing-translation", "name": "如何AI翻译多国商品文案？"},
+        {"slug": "sku-poster", "name": "怎么批量制作SKU海报/促销图？"},
+        {"slug": "pricing-calc", "name": "有没有AI算利润/测算定价？"},
+        {"slug": "live-script", "name": "怎么生成直播脚本/弹幕话术？"},
+        {"slug": "image-editing", "name": "如何AI抠图/换背景/3D建模？"},
+        {"slug": "customer-service", "name": "跨境差评自动回复/客服话术？"}
+      ]
+    },
+    {
+      "slug": "self_media",
+      "name": "自媒体/内容创作",
+      "name_en": "Self-media / Content Creation",
+      "description": "短视频脚本、封面设计、多平台分发",
+      "sort_order": 2,
+      "sub_categories": [
+        {"slug": "xiaohongshu", "name": "怎么写小红书爆款标题/图文？"},
+        {"slug": "wechat-article", "name": "公众号长文/封面图一键生成？"},
+        {"slug": "short-video-script", "name": "短视频口播脚本/好物分享文案？"},
+        {"slug": "ai-dubbing", "name": "如何AI配音/数字人出镜？"},
+        {"slug": "image-to-video", "name": "图文转视频/静态图生成短视频？"},
+        {"slug": "podcast", "name": "播客文案/降噪/字幕生成？"},
+        {"slug": "social-copy", "name": "朋友圈/种草短文案怎么写？"},
+        {"slug": "multi-platform", "name": "多平台分发适配文案改写？"},
+        {"slug": "data-analysis", "name": "账号数据复盘/选题库/爆款分析？"}
+      ]
+    },
+    {
+      "slug": "cross_border_opc",
+      "name": "OPC跨境单人创业",
+      "name_en": "Cross-border OPC",
+      "description": "独立站搭建、外贸开发信、海外营销",
+      "sort_order": 3,
+      "sub_categories": [
+        {"slug": "landing-page", "name": "如何AI搭建独立站/落地页？"},
+        {"slug": "outreach-email", "name": "外贸开发信/社媒发帖文案？"},
+        {"slug": "social-ad", "name": "海外社媒广告图制作？"},
+        {"slug": "influencer-email", "name": "海外网红合作邮件怎么写？"},
+        {"slug": "seo-article", "name": "独立站SEO文章/博客自动生成？"},
+        {"slug": "quotation", "name": "外贸报价单/合同AI生成？"},
+        {"slug": "multilingual", "name": "多语言实时翻译/会议同传？"},
+        {"slug": "market-research", "name": "海外市场调研/竞品分析？"},
+        {"slug": "compliance", "name": "跨境合规/税务/知识产权？"}
+      ]
+    },
+    {
+      "slug": "design",
+      "name": "设计/创意",
+      "name_en": "Design / Creative",
+      "description": "AI设计、图片生成、创意工具",
+      "sort_order": 4,
+      "sub_categories": [
+        {"slug": "ai-image", "name": "AI图片生成/绘画？"},
+        {"slug": "logo-design", "name": "AI Logo/品牌设计？"},
+        {"slug": "ui-design", "name": "AI UI/UX设计？"},
+        {"slug": "3d-model", "name": "3D建模/渲染？"},
+        {"slug": "image-enhance", "name": "图片增强/修复/放大？"}
+      ]
+    },
+    {
+      "slug": "translation",
+      "name": "翻译/多语言",
+      "name_en": "Translation / Multilingual",
+      "description": "文档翻译、实时翻译、多语言支持",
+      "sort_order": 5,
+      "sub_categories": [
+        {"slug": "document-translation", "name": "文档翻译（PDF/Word/PPT）？"},
+        {"slug": "realtime-translation", "name": "实时翻译/会议同传？"},
+        {"slug": "subtitle-translation", "name": "视频字幕翻译？"},
+        {"slug": "website-translation", "name": "网站多语言翻译？"}
+      ]
+    },
+    {
+      "slug": "writing",
+      "name": "文案/写作",
+      "name_en": "Copywriting / Writing",
+      "description": "AI写作、文案生成、内容创作",
+      "sort_order": 6,
+      "sub_categories": [
+        {"slug": "copywriting", "name": "营销文案/广告语？"},
+        {"slug": "blog-writing", "name": "博客/文章写作？"},
+        {"slug": "email-writing", "name": "邮件/开发信写作？"},
+        {"slug": "script-writing", "name": "脚本/剧本写作？"},
+        {"slug": "academic-writing", "name": "学术论文/报告？"}
+      ]
+    },
+    {
+      "slug": "video",
+      "name": "视频/音频",
+      "name_en": "Video / Audio",
+      "description": "视频生成、音频处理、配音工具",
+      "sort_order": 7,
+      "sub_categories": [
+        {"slug": "video-generation", "name": "AI视频生成？"},
+        {"slug": "video-editing", "name": "AI视频剪辑/特效？"},
+        {"slug": "ai-dubbing-voice", "name": "AI配音/语音合成？"},
+        {"slug": "audio-processing", "name": "音频降噪/增强？"},
+        {"slug": "digital-human", "name": "数字人/虚拟主播？"}
+      ]
+    },
+    {
+      "slug": "productivity",
+      "name": "效率/办公",
+      "name_en": "Productivity / Office",
+      "description": "办公自动化、效率工具、项目管理",
+      "sort_order": 8,
+      "sub_categories": [
+        {"slug": "ai-assistant", "name": "AI助手/对话机器人？"},
+        {"slug": "document-ai", "name": "文档处理/总结/提取？"},
+        {"slug": "spreadsheet-ai", "name": "表格处理/数据分析？"},
+        {"slug": "presentation-ai", "name": "PPT生成/演示文稿？"},
+        {"slug": "project-management", "name": "项目管理/任务协作？"}
+      ]
+    },
+    {
+      "slug": "finance",
+      "name": "财务/法务",
+      "name_en": "Finance / Legal",
+      "description": "财务分析、合同审查、税务工具",
+      "sort_order": 9,
+      "sub_categories": [
+        {"slug": "financial-analysis", "name": "财务分析/报表生成？"},
+        {"slug": "contract-review", "name": "合同审查/条款提取？"},
+        {"slug": "tax-tool", "name": "税务计算/申报？"},
+        {"slug": "invoice", "name": "发票生成/管理？"}
+      ]
+    },
+    {
+      "slug": "marketing",
+      "name": "营销/增长",
+      "name_en": "Marketing / Growth",
+      "description": "SEO优化、广告投放、用户增长",
+      "sort_order": 10,
+      "sub_categories": [
+        {"slug": "seo-tool", "name": "SEO优化/关键词分析？"},
+        {"slug": "ad-copy", "name": "广告文案/投放优化？"},
+        {"slug": "social-media", "name": "社媒运营/内容排期？"},
+        {"slug": "email-marketing", "name": "邮件营销/自动化？"},
+        {"slug": "growth-analytics", "name": "增长分析/用户画像？"}
+      ]
+    }
+  ]
+}

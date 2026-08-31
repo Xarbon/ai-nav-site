@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: #165DFF;
+  --color-primary-light: #4580FF;
+  --color-primary-dark: #0E42C2;
+  --color-primary-bg: rgba(22, 93, 255, 0.08);
+  --color-free: #36D399;
+  --color-free-bg: rgba(54, 211, 153, 0.12);
+  --color-free-text: #065F46;
+  --color-paid: #FB923C;
+  --color-paid-bg: rgba(251, 146, 60, 0.12);
+  --color-paid-text: #9A3412;
+  --color-model: #A855F7;
+  --color-model-bg: rgba(168, 85, 247, 0.12);
+  --color-model-text: #6B21A8;
+  --color-plugin: #38BDF8;
+  --color-plugin-bg: rgba(56, 189, 248, 0.12);
+  --color-plugin-text: #0369A1;
+  --color-risk: #EF4444;
+  --color-risk-bg: rgba(239, 68, 68, 0.12);
+  --color-risk-text: #B91C1C;
+  --bg-page: #FFFFFF;
+  --bg-surface: #F7F8FA;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F0F2F5;
+  --text-title: #1D2129;
+  --text-body: #4E5969;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --border-color: #E5E7EB;
+  --border-light: #F0F2F5;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-body);
+}
+
+.font-zh {
+  font-family: 'Source Han Sans SC', 'Noto Sans SC', system-ui, sans-serif;
+}
+
+.font-en {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+  /* Container padding */
+  .px-6,
+  .md\:px-10 {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  h2 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Grid: single column */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4,
+  .sm\:grid-cols-2,
+  .lg\:grid-cols-3,
+  .xl\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hide sidebars */
+  aside {
+    display: none !important;
+  }
+
+  /* Card padding */
+  .p-5 {
+    padding: 12px !important;
+  }
+
+  /* Search bar height */
+  .h-12 {
+    height: 44px !important;
+  }
+
+  /* Hide desktop nav, show mobile menu */
+  .md\:flex {
+    display: none !important;
+  }
+  .md\:hidden {
+    display: block !important;
+  }
+
+  /* Footer grid: single column */
+  .md\:grid-cols-2,
+  .md\:grid-cols-4,
+  .lg\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* AI Daily cards: single column */
+  .lg\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid-cols-4,
+  .lg\:grid-cols-3,
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }

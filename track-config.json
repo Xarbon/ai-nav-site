@@ -1,0 +1,122 @@
+{
+  "ecommerce": {
+    "name": "电商赛道",
+    "name_en": "E-commerce",
+    "slug": "ecommerce",
+    "icon": "/icons/tracks/ecommerce.svg"
+  },
+  "content_creation": {
+    "name": "自媒体/内容创作",
+    "name_en": "Content Creation",
+    "slug": "content_creation",
+    "icon": "/icons/tracks/content_creation.svg"
+  },
+  "cross_border_opc": {
+    "name": "OPC跨境单人创业",
+    "name_en": "Cross-border OPC",
+    "slug": "cross_border_opc",
+    "icon": "/icons/tracks/cross_border_opc.svg"
+  },
+  "quant_trading": {
+    "name": "量化交易",
+    "name_en": "Quant Trading",
+    "slug": "quant_trading",
+    "icon": "/icons/tracks/quant_trading.svg"
+  },
+  "ai_comic_drama": {
+    "name": "AI漫剧创作",
+    "name_en": "AI Comic Drama",
+    "slug": "ai_comic_drama",
+    "icon": "/icons/tracks/ai_comic_drama.svg"
+  },
+  "office_productivity": {
+    "name": "办公职场/效率办公",
+    "name_en": "Office Productivity",
+    "slug": "office_productivity",
+    "icon": "/icons/tracks/office_productivity.svg"
+  },
+  "design": {
+    "name": "设计视觉",
+    "name_en": "Design & Visual",
+    "slug": "design",
+    "icon": "/icons/tracks/design.svg"
+  },
+  "dev_automation": {
+    "name": "程序开发/技术自动化",
+    "name_en": "Dev & Automation",
+    "slug": "dev_automation",
+    "icon": "/icons/tracks/dev_automation.svg"
+  },
+  "education": {
+    "name": "教育培训/知识付费",
+    "name_en": "Education",
+    "slug": "education",
+    "icon": "/icons/tracks/education.svg"
+  },
+  "local_business": {
+    "name": "本地实体商家",
+    "name_en": "Local Business",
+    "slug": "local_business",
+    "icon": "/icons/tracks/local_business.svg"
+  },
+  "audio_video": {
+    "name": "音频视频创作",
+    "name_en": "Audio & Video",
+    "slug": "audio_video",
+    "icon": "/icons/tracks/audio_video.svg"
+  },
+  "lifestyle": {
+    "name": "生活/个人IP",
+    "name_en": "Lifestyle & Personal IP",
+    "slug": "lifestyle",
+    "icon": "/icons/tracks/lifestyle.svg"
+  },
+  "legal_compliance": {
+    "name": "法律合规",
+    "name_en": "Legal & Compliance",
+    "slug": "legal_compliance",
+    "icon": "/icons/tracks/legal_compliance.svg"
+  },
+  "ai_customer_service": {
+    "name": "AI客服/私域运营",
+    "name_en": "AI Customer Service",
+    "slug": "ai_customer_service",
+    "icon": "/icons/tracks/ai_customer_service.svg"
+  },
+  "marketing": {
+    "name": "营销投放/增长",
+    "name_en": "Marketing & Growth",
+    "slug": "marketing",
+    "icon": "/icons/tracks/marketing.svg"
+  },
+  "hr": {
+    "name": "人力资源",
+    "name_en": "Human Resources",
+    "slug": "hr",
+    "icon": "/icons/tracks/hr.svg"
+  },
+  "construction": {
+    "name": "建筑工程",
+    "name_en": "Construction",
+    "slug": "construction",
+    "icon": "/icons/tracks/construction.svg"
+  },
+  "industry": {
+    "name": "工业制造",
+    "name_en": "Industry",
+    "slug": "industry",
+    "icon": "/icons/tracks/industry.svg"
+  },
+  "healthcare": {
+    "name": "医疗健康",
+    "name_en": "Healthcare",
+    "slug": "healthcare",
+    "icon": "/icons/tracks/healthcare.svg"
+  },
+  "research": {
+    "name": "科研学术",
+    "name_en": "Research",
+    "slug": "research",
+    "icon": "/icons/tracks/research.svg"
+  }
+}

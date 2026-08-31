@@ -1,0 +1,46 @@
+import { MetadataRoute } from 'next';
+import { getDB } from '@/lib/d1/client';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const db = getDB();
+  
+  // 获取所有工具
+  const { results: tools } = await db.prepare(
+    "SELECT slug, updated_at FROM tools WHERE status = 'active'"
+  ).all();
+  
+  const baseUrl = 'https://aiqury.com';
+  
+  // 静态页面
+  const staticPages = [
+    { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
+    { url: `${baseUrl}/search`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8 },
+    { url: `${baseUrl}/submit`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
+  ];
+  
+  // 分类页面
+  const categories = [
+    'ecommerce', 'content_creation', 'cross_border_opc', 'quant_trading',
+    'ai_comic_drama', 'office_productivity', 'design', 'dev_automation',
+    'education', 'local_business', 'audio_video', 'lifestyle',
+    'legal_compliance', 'ai_customer_service', 'marketing', 'hr',
+    'construction', 'industry', 'healthcare', 'research'
+  ];
+  
+  const categoryPages = categories.map(cat => ({
+    url: `${baseUrl}/category/${cat}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+  
+  // 工具详情页面
+  const toolPages = (tools as any[]).map(tool => ({
+    url: `${baseUrl}/tool/${tool.slug}`,
+    lastModified: tool.updated_at ? new Date(tool.updated_at) : new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
+  
+  return [...staticPages, ...categoryPages, ...toolPages];
+}

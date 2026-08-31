@@ -1,0 +1,22 @@
+# AIqury AI Tools Navigation
+
+> AI tools navigation for solopreneurs, cross-border e-commerce and content creators. Categorized by real business scenarios.
+
+## Categories
+- [E-commerce](/category/ecommerce): Product images, listing translation, customer service automation
+- [Self-media / Content Creation](/category/self_media): Short video scripts, cover design, multi-platform distribution
+- [Cross-border OPC](/category/cross_border_opc): Landing page builder, outreach emails, overseas marketing
+- [Design / Creative](/category/design): AI image generation, logo design, 3D modeling
+- [Translation / Multilingual](/category/translation): Document translation, real-time translation, subtitles
+- [Copywriting / Writing](/category/writing): Marketing copy, blog writing, email writing
+- [Video / Audio](/category/video): AI video generation, dubbing, digital human
+- [Productivity / Office](/category/productivity): AI assistant, document processing, data analysis
+- [Finance / Legal](/category/finance): Financial analysis, contract review, tax tools
+- [Marketing / Growth](/category/marketing): SEO tools, ad copy, social media management
+
+## Popular Tools
+- [Jimeng AI](/tool/jimeng-ai): ByteDance AI image/video generation, perfect for e-commerce product images
+- [DeepL](/tool/deepl): Most accurate AI translation, supports document translation in 31 languages
+- [ChatGPT](/tool/chatgpt): OpenAI AI assistant, strongest general-purpose AI tool
+- [Midjourney](/tool/midjourney): Most popular AI art generation tool
+- [Canva](/tool/canva): Online design tool with AI-powered templates for e-commerce and social media

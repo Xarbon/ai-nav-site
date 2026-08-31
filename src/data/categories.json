@@ -1,0 +1,734 @@
+{
+  "categories": [
+    {
+      "slug": "ecommerce",
+      "name": "电商赛道",
+      "name_en": "E-commerce",
+      "sub_categories": [
+        {
+          "slug": "product-image",
+          "name": "如何生成商品主图？",
+          "name_en": "How to generate product images?"
+        },
+        {
+          "slug": "product-video",
+          "name": "如何制作商品展示视频？",
+          "name_en": "How to make product videos?"
+        },
+        {
+          "slug": "detail-copy",
+          "name": "如何写商品详情页文案？",
+          "name_en": "How to write product descriptions?"
+        },
+        {
+          "slug": "sku-poster",
+          "name": "如何批量做SKU海报？",
+          "name_en": "How to batch create SKU posters?"
+        },
+        {
+          "slug": "product-cutout",
+          "name": "如何AI抠图换背景？",
+          "name_en": "How to AI cutout and change background?"
+        },
+        {
+          "slug": "listing-seo",
+          "name": "如何优化商品标题SEO？",
+          "name_en": "How to optimize listing SEO?"
+        },
+        {
+          "slug": "livestream-script",
+          "name": "如何写直播带货脚本？",
+          "name_en": "How to write livestream scripts?"
+        },
+        {
+          "slug": "review-reply",
+          "name": "如何自动回复买家评价？",
+          "name_en": "How to auto-reply to reviews?"
+        },
+        {
+          "slug": "multi-lang-copy",
+          "name": "如何多语言翻译商品文案？",
+          "name_en": "How to translate product copy?"
+        },
+        {
+          "slug": "profit-calc",
+          "name": "如何计算商品利润？",
+          "name_en": "How to calculate profit?"
+        }
+      ]
+    },
+    {
+      "slug": "content_creation",
+      "name": "自媒体/内容创作",
+      "name_en": "Content Creation",
+      "sub_categories": [
+        {
+          "slug": "short-video-script",
+          "name": "如何批量生成短视频脚本？",
+          "name_en": "How to batch generate video scripts?"
+        },
+        {
+          "slug": "podcast-tools",
+          "name": "如何制作播客内容？",
+          "name_en": "How to create podcast content?"
+        },
+        {
+          "slug": "wechat-article",
+          "name": "如何写微信公众号文章？",
+          "name_en": "How to write WeChat articles?"
+        },
+        {
+          "slug": "xiaohongshu-copy",
+          "name": "如何写小红书种草文案？",
+          "name_en": "How to write Xiaohongshu posts?"
+        },
+        {
+          "slug": "social-copy",
+          "name": "如何写社交媒体文案？",
+          "name_en": "How to write social media copy?"
+        },
+        {
+          "slug": "cover-illustration",
+          "name": "如何生成封面插画？",
+          "name_en": "How to generate cover illustrations?"
+        },
+        {
+          "slug": "image-to-video",
+          "name": "如何图转视频？",
+          "name_en": "How to convert images to video?"
+        },
+        {
+          "slug": "multi-platform-adapt",
+          "name": "如何多平台适配内容？",
+          "name_en": "How to adapt content for platforms?"
+        },
+        {
+          "slug": "content-analytics",
+          "name": "如何分析内容数据？",
+          "name_en": "How to analyze content data?"
+        },
+        {
+          "slug": "ai-voice-avatar",
+          "name": "如何生成AI数字人视频？",
+          "name_en": "How to create AI avatar videos?"
+        }
+      ]
+    },
+    {
+      "slug": "cross_border_opc",
+      "name": "OPC跨境单人创业",
+      "name_en": "Cross-border OPC",
+      "sub_categories": [
+        {
+          "slug": "logistics-cost",
+          "name": "如何计算物流成本？",
+          "name_en": "How to calculate logistics costs?"
+        },
+        {
+          "slug": "landing-page",
+          "name": "如何做多语言落地页？",
+          "name_en": "How to create landing pages?"
+        },
+        {
+          "slug": "cold-email",
+          "name": "如何写开发信？",
+          "name_en": "How to write cold emails?"
+        },
+        {
+          "slug": "after-sales",
+          "name": "如何做售后客服？",
+          "name_en": "How to handle after-sales?"
+        },
+        {
+          "slug": "live-translation",
+          "name": "如何做直播实时翻译？",
+          "name_en": "How to do live translation?"
+        },
+        {
+          "slug": "seo-blog",
+          "name": "如何写SEO博客文章？",
+          "name_en": "How to write SEO blogs?"
+        },
+        {
+          "slug": "social-ad-creative",
+          "name": "如何生成社交广告素材？",
+          "name_en": "How to generate social ad creatives?"
+        },
+        {
+          "slug": "ad-creative",
+          "name": "如何批量做广告创意？",
+          "name_en": "How to batch create ad creatives?"
+        },
+        {
+          "slug": "influencer-outreach",
+          "name": "如何联系海外KOL？",
+          "name_en": "How to reach out to influencers?"
+        },
+        {
+          "slug": "trade-docs",
+          "name": "如何生成贸易单据？",
+          "name_en": "How to generate trade documents?"
+        }
+      ]
+    },
+    {
+      "slug": "quant_trading",
+      "name": "量化交易",
+      "name_en": "Quant Trading",
+      "sub_categories": [
+        {
+          "slug": "trading-bot",
+          "name": "如何搭建量化交易机器人？",
+          "name_en": "How to build trading bots?"
+        },
+        {
+          "slug": "crypto-tools",
+          "name": "如何做加密货币分析？",
+          "name_en": "How to analyze crypto?"
+        },
+        {
+          "slug": "strategy-backtest",
+          "name": "如何做策略回测？",
+          "name_en": "How to backtest strategies?"
+        },
+        {
+          "slug": "market-data",
+          "name": "如何获取实时行情数据？",
+          "name_en": "How to get market data?"
+        }
+      ]
+    },
+    {
+      "slug": "ai_comic_drama",
+      "name": "AI漫剧创作",
+      "name_en": "AI Comic Drama",
+      "sub_categories": [
+        {
+          "slug": "storyboard-gen",
+          "name": "如何生成漫画分镜？",
+          "name_en": "How to generate storyboards?"
+        },
+        {
+          "slug": "character-consistency",
+          "name": "如何保持角色一致性？",
+          "name_en": "How to keep character consistency?"
+        },
+        {
+          "slug": "novel-to-comic",
+          "name": "如何小说转漫画？",
+          "name_en": "How to convert novel to comic?"
+        }
+      ]
+    },
+    {
+      "slug": "office_productivity",
+      "name": "办公职场/效率办公",
+      "name_en": "Office Productivity",
+      "sub_categories": [
+        {
+          "slug": "project-sop",
+          "name": "如何生成项目SOP？",
+          "name_en": "How to generate project SOPs?"
+        },
+        {
+          "slug": "meeting-minutes",
+          "name": "如何自动整理会议纪要？",
+          "name_en": "How to auto-organize meeting notes?"
+        },
+        {
+          "slug": "excel-tools",
+          "name": "如何用AI处理Excel？",
+          "name_en": "How to use AI for Excel?"
+        },
+        {
+          "slug": "email-communication",
+          "name": "如何高效写商务邮件？",
+          "name_en": "How to write business emails?"
+        },
+        {
+          "slug": "mindmap-plan",
+          "name": "如何生成思维导图？",
+          "name_en": "How to generate mind maps?"
+        },
+        {
+          "slug": "pdf-tools",
+          "name": "如何用AI处理PDF？",
+          "name_en": "How to use AI for PDFs?"
+        },
+        {
+          "slug": "ppt-generator",
+          "name": "如何AI生成PPT？",
+          "name_en": "How to AI generate PPTs?"
+        },
+        {
+          "slug": "report-writing",
+          "name": "如何自动生成报告？",
+          "name_en": "How to auto-generate reports?"
+        },
+        {
+          "slug": "ocr-tools",
+          "name": "如何用OCR提取文字？",
+          "name_en": "How to extract text with OCR?"
+        }
+      ]
+    },
+    {
+      "slug": "design",
+      "name": "设计视觉",
+      "name_en": "Design & Visual",
+      "sub_categories": [
+        {
+          "slug": "logo-vi",
+          "name": "如何设计Logo和VI？",
+          "name_en": "How to design logos and VI?"
+        },
+        {
+          "slug": "3d-rendering",
+          "name": "如何3D渲染效果图？",
+          "name_en": "How to do 3D rendering?"
+        },
+        {
+          "slug": "batch-image",
+          "name": "如何批量处理图片？",
+          "name_en": "How to batch process images?"
+        },
+        {
+          "slug": "image-restore",
+          "name": "如何修复老照片？",
+          "name_en": "How to restore old photos?"
+        },
+        {
+          "slug": "poster-flyer",
+          "name": "如何设计海报传单？",
+          "name_en": "How to design posters and flyers?"
+        },
+        {
+          "slug": "interior-design",
+          "name": "如何做室内设计渲染？",
+          "name_en": "How to do interior design rendering?"
+        },
+        {
+          "slug": "id-photo",
+          "name": "如何生成证件照？",
+          "name_en": "How to generate ID photos?"
+        },
+        {
+          "slug": "packaging",
+          "name": "如何设计产品包装？",
+          "name_en": "How to design packaging?"
+        },
+        {
+          "slug": "style-image",
+          "name": "如何做风格化图片？",
+          "name_en": "How to stylize images?"
+        },
+        {
+          "slug": "comic-character",
+          "name": "如何设计漫画角色？",
+          "name_en": "How to design comic characters?"
+        }
+      ]
+    },
+    {
+      "slug": "dev_automation",
+      "name": "程序开发/技术自动化",
+      "name_en": "Dev & Automation",
+      "sub_categories": [
+        {
+          "slug": "ai-code-gen",
+          "name": "如何AI生成代码？",
+          "name_en": "How to AI generate code?"
+        },
+        {
+          "slug": "vps-deploy",
+          "name": "如何部署VPS服务器？",
+          "name_en": "How to deploy VPS?"
+        },
+        {
+          "slug": "web-scraper",
+          "name": "如何爬取网页数据？",
+          "name_en": "How to scrape web data?"
+        },
+        {
+          "slug": "code-assistant",
+          "name": "如何用AI辅助编程？",
+          "name_en": "How to use AI coding assistant?"
+        },
+        {
+          "slug": "ai-agent",
+          "name": "如何搭建AI Agent？",
+          "name_en": "How to build AI agents?"
+        },
+        {
+          "slug": "data-pipeline",
+          "name": "如何搭建数据管道？",
+          "name_en": "How to build data pipelines?"
+        },
+        {
+          "slug": "low-code-rpa",
+          "name": "如何用低代码做自动化？",
+          "name_en": "How to use low-code automation?"
+        },
+        {
+          "slug": "api-tools",
+          "name": "如何管理API接口？",
+          "name_en": "How to manage APIs?"
+        },
+        {
+          "slug": "prompt-tools",
+          "name": "如何优化Prompt？",
+          "name_en": "How to optimize prompts?"
+        },
+        {
+          "slug": "seo-geo",
+          "name": "如何做本地SEO优化？",
+          "name_en": "How to do local SEO?"
+        }
+      ]
+    },
+    {
+      "slug": "education",
+      "name": "教育培训/知识付费",
+      "name_en": "Education",
+      "sub_categories": [
+        {
+          "slug": "homework-grading",
+          "name": "如何自动批改作业？",
+          "name_en": "How to auto-grade homework?"
+        },
+        {
+          "slug": "knowledge-column",
+          "name": "如何制作知识专栏？",
+          "name_en": "How to create knowledge columns?"
+        },
+        {
+          "slug": "course-content",
+          "name": "如何生成课程内容？",
+          "name_en": "How to generate course content?"
+        },
+        {
+          "slug": "study-notes",
+          "name": "如何自动生成学习笔记？",
+          "name_en": "How to auto-generate study notes?"
+        },
+        {
+          "slug": "teaching-animation",
+          "name": "如何制作教学动画？",
+          "name_en": "How to make teaching animations?"
+        },
+        {
+          "slug": "exam-bank",
+          "name": "如何建立题库？",
+          "name_en": "How to build question banks?"
+        },
+        {
+          "slug": "enrollment-marketing",
+          "name": "如何做招生营销？",
+          "name_en": "How to do enrollment marketing?"
+        }
+      ]
+    },
+    {
+      "slug": "local_business",
+      "name": "本地实体商家",
+      "name_en": "Local Business",
+      "sub_categories": [
+        {
+          "slug": "customer-retention",
+          "name": "如何做客户留存？",
+          "name_en": "How to retain customers?"
+        },
+        {
+          "slug": "menu-design",
+          "name": "如何设计菜单？",
+          "name_en": "How to design menus?"
+        },
+        {
+          "slug": "platform-copy",
+          "name": "如何写平台店铺文案？",
+          "name_en": "How to write platform copy?"
+        },
+        {
+          "slug": "store-event",
+          "name": "如何策划门店活动？",
+          "name_en": "How to plan store events?"
+        },
+        {
+          "slug": "store-video",
+          "name": "如何制作门店宣传视频？",
+          "name_en": "How to make store videos?"
+        }
+      ]
+    },
+    {
+      "slug": "audio_video",
+      "name": "音频视频创作",
+      "name_en": "Audio & Video",
+      "sub_categories": [
+        {
+          "slug": "video-editing",
+          "name": "如何AI剪辑视频？",
+          "name_en": "How to AI edit videos?"
+        },
+        {
+          "slug": "ai-music",
+          "name": "如何生成AI音乐？",
+          "name_en": "How to generate AI music?"
+        },
+        {
+          "slug": "audio-cleanup",
+          "name": "如何降噪处理音频？",
+          "name_en": "How to clean up audio?"
+        },
+        {
+          "slug": "text-to-speech",
+          "name": "如何文字转语音？",
+          "name_en": "How to do text-to-speech?"
+        },
+        {
+          "slug": "video-clipping",
+          "name": "如何智能裁切视频？",
+          "name_en": "How to smart clip videos?"
+        }
+      ]
+    },
+    {
+      "slug": "lifestyle",
+      "name": "生活/个人IP",
+      "name_en": "Lifestyle & Personal IP",
+      "sub_categories": [
+        {
+          "slug": "fitness-diet",
+          "name": "如何制定健身饮食计划？",
+          "name_en": "How to plan fitness diet?"
+        },
+        {
+          "slug": "fashion-tryon",
+          "name": "如何AI虚拟试穿？",
+          "name_en": "How to AI virtual try-on?"
+        },
+        {
+          "slug": "travel-plan",
+          "name": "如何生成旅行攻略？",
+          "name_en": "How to generate travel plans?"
+        },
+        {
+          "slug": "daily-copy",
+          "name": "如何写日常分享文案？",
+          "name_en": "How to write daily posts?"
+        },
+        {
+          "slug": "wedding",
+          "name": "如何策划婚礼方案？",
+          "name_en": "How to plan weddings?"
+        }
+      ]
+    },
+    {
+      "slug": "legal_compliance",
+      "name": "法律合规",
+      "name_en": "Legal & Compliance",
+      "sub_categories": [
+        {
+          "slug": "contract-gen",
+          "name": "如何生成合同模板？",
+          "name_en": "How to generate contracts?"
+        },
+        {
+          "slug": "risk-check",
+          "name": "如何做风险审查？",
+          "name_en": "How to do risk checks?"
+        },
+        {
+          "slug": "trademark-brand",
+          "name": "如何注册商标品牌？",
+          "name_en": "How to register trademarks?"
+        },
+        {
+          "slug": "qualification-docs",
+          "name": "如何准备资质文件？",
+          "name_en": "How to prepare qualification docs?"
+        }
+      ]
+    },
+    {
+      "slug": "ai_customer_service",
+      "name": "AI客服/私域运营",
+      "name_en": "AI Customer Service",
+      "sub_categories": [
+        {
+          "slug": "chatbot-build",
+          "name": "如何搭建智能客服？",
+          "name_en": "How to build chatbots?"
+        },
+        {
+          "slug": "omnichannel",
+          "name": "如何做全渠道客服？",
+          "name_en": "How to do omnichannel CS?"
+        },
+        {
+          "slug": "private-domain",
+          "name": "如何做私域运营？",
+          "name_en": "How to manage private domain?"
+        },
+        {
+          "slug": "ticket-system",
+          "name": "如何管理工单系统？",
+          "name_en": "How to manage ticket systems?"
+        },
+        {
+          "slug": "lead-capture",
+          "name": "如何捕获销售线索？",
+          "name_en": "How to capture leads?"
+        }
+      ]
+    },
+    {
+      "slug": "marketing",
+      "name": "营销投放/增长",
+      "name_en": "Marketing & Growth",
+      "sub_categories": [
+        {
+          "slug": "campaign-analytics",
+          "name": "如何分析营销数据？",
+          "name_en": "How to analyze marketing data?"
+        },
+        {
+          "slug": "growth-hacking",
+          "name": "如何做增长黑客？",
+          "name_en": "How to do growth hacking?"
+        },
+        {
+          "slug": "keyword-research",
+          "name": "如何做关键词研究？",
+          "name_en": "How to do keyword research?"
+        },
+        {
+          "slug": "ad-copy",
+          "name": "如何写广告文案？",
+          "name_en": "How to write ad copy?"
+        },
+        {
+          "slug": "ad-creative-gen",
+          "name": "如何生成广告素材？",
+          "name_en": "How to generate ad creatives?"
+        }
+      ]
+    },
+    {
+      "slug": "hr",
+      "name": "人力资源",
+      "name_en": "Human Resources",
+      "sub_categories": [
+        {
+          "slug": "performance-review",
+          "name": "如何做绩效评估？",
+          "name_en": "How to do performance reviews?"
+        },
+        {
+          "slug": "recruitment-copy",
+          "name": "如何写招聘文案？",
+          "name_en": "How to write recruitment copy?"
+        },
+        {
+          "slug": "interview-questions",
+          "name": "如何生成面试问题？",
+          "name_en": "How to generate interview questions?"
+        },
+        {
+          "slug": "employee-training",
+          "name": "如何做员工培训？",
+          "name_en": "How to do employee training?"
+        }
+      ]
+    },
+    {
+      "slug": "construction",
+      "name": "建筑工程",
+      "name_en": "Construction",
+      "sub_categories": [
+        {
+          "slug": "cad-design",
+          "name": "如何做CAD设计？",
+          "name_en": "How to do CAD design?"
+        },
+        {
+          "slug": "floorplan-render",
+          "name": "如何渲染户型图？",
+          "name_en": "How to render floor plans?"
+        }
+      ]
+    },
+    {
+      "slug": "industry",
+      "name": "工业制造",
+      "name_en": "Industry",
+      "sub_categories": [
+        {
+          "slug": "quality-inspection",
+          "name": "如何做质量检测？",
+          "name_en": "How to do quality inspection?"
+        },
+        {
+          "slug": "predictive-maintain",
+          "name": "如何预测设备维护？",
+          "name_en": "How to predict maintenance?"
+        },
+        {
+          "slug": "production-schedule",
+          "name": "如何排产计划？",
+          "name_en": "How to schedule production?"
+        }
+      ]
+    },
+    {
+      "slug": "healthcare",
+      "name": "医疗健康",
+      "name_en": "Healthcare",
+      "sub_categories": [
+        {
+          "slug": "health-consult",
+          "name": "如何做健康咨询？",
+          "name_en": "How to do health consulting?"
+        },
+        {
+          "slug": "fitness-health",
+          "name": "如何制定健康方案？",
+          "name_en": "How to plan health programs?"
+        },
+        {
+          "slug": "medical-imaging",
+          "name": "如何分析医学影像？",
+          "name_en": "How to analyze medical images?"
+        },
+        {
+          "slug": "mental-health",
+          "name": "如何做心理健康评估？",
+          "name_en": "How to assess mental health?"
+        }
+      ]
+    },
+    {
+      "slug": "research",
+      "name": "科研学术",
+      "name_en": "Research",
+      "sub_categories": [
+        {
+          "slug": "literature-review",
+          "name": "如何做文献综述？",
+          "name_en": "How to do literature review?"
+        },
+        {
+          "slug": "data-analysis",
+          "name": "如何分析研究数据？",
+          "name_en": "How to analyze research data?"
+        },
+        {
+          "slug": "paper-writing",
+          "name": "如何辅助论文写作？",
+          "name_en": "How to assist paper writing?"
+        }
+      ]
+    }
+  ]
+}
