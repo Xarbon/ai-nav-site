@@ -1,0 +1,26 @@
+{
+  "startTime": "2026-08-31T09:15:48.032Z",
+  "sources": {
+    "product_hunt": {
+      "collected": 0,
+      "new": 0,
+      "errors": [
+        "Product Hunt API token not configured"
+      ]
+    },
+    "github": {
+      "collected": 0,
+      "new": 0,
+      "errors": []
+    }
+  },
+  "total": {
+    "collected": 0,
+    "processed": 0,
+    "inserted": 0,
+    "skipped": 0,
+    "errors": []
+  },
+  "endTime": "2026-08-31T09:15:48.032Z",
+  "duration": "0.01s"
+}

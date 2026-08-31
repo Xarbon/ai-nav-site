@@ -16,7 +16,7 @@ import { collectFromProductHunt } from './sources/producthunt.js';
 import { collectFromGitHub } from './sources/github.js';
 import { processTools } from './processors/main.js';
 import { batchInsertTools, checkExistingTools } from './db/d1.js';
-import { generateReport, saveReport } from './utils/report.js';
+import { saveReport } from './utils/report.js';
 import { log, LogLevels } from './utils/logger.js';
 
 async function main() {
