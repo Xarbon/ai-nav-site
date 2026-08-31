@@ -7,7 +7,7 @@
 """
 import subprocess, json, time
 
-TOKEN = 'REDACTED_CLOUDFLARE_TOKEN'
+TOKEN = 'os.environ.get('CLOUDFLARE_API_TOKEN', 'YOUR_TOKEN_HERE')'
 
 def d1_exec(sql):
     with open('/tmp/d1.sql', 'w') as f: f.write(sql)

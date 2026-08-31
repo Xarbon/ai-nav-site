@@ -5,7 +5,7 @@ Fast translator v2 - uses D1 HTTP API directly, avoids slow wrangler CLI
 import subprocess, json, sys, time, urllib.request, urllib.parse, os, re
 
 DB_ID = 'c5523847-81df-448f-b2bf-0a5ea8ed6ab9'
-TOKEN = 'REDACTED_CLOUDFLARE_TOKEN'
+TOKEN = 'os.environ.get('CLOUDFLARE_API_TOKEN', 'YOUR_TOKEN_HERE')'
 
 # Get account ID from wrangler
 def get_account_id():

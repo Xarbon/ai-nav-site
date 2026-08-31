@@ -5,7 +5,7 @@ en 记录的 slug 加 -en 后缀以避免唯一约束冲突
 """
 import subprocess, json, time
 
-TOKEN = 'REDACTED_CLOUDFLARE_TOKEN'
+TOKEN = 'os.environ.get('CLOUDFLARE_API_TOKEN', 'YOUR_TOKEN_HERE')'
 
 def d1_exec(sql):
     with open('/tmp/d1.sql', 'w') as f: f.write(sql)

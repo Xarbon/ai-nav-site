@@ -11,7 +11,7 @@ import fs from 'fs';
 const DB_NAME = 'aiqury-db';
 
 async function d1Query(sql) {
-  const cmd = `CLOUDFLARE_API_TOKEN=REDACTED_CLOUDFLARE_TOKEN npx wrangler d1 execute ${DB_NAME} --remote --command="${sql.replace(/"/g, '\\"')}" --json 2>/dev/null`;
+  const cmd = `CLOUDFLARE_API_TOKEN=${process.env.CLOUDFLARE_API_TOKEN} npx wrangler d1 execute ${DB_NAME} --remote --command="${sql.replace(/"/g, '\\"')}" --json 2>/dev/null`;
   const result = execSync(cmd, { timeout: 30000 }).toString();
   const parsed = JSON.parse(result);
   return parsed[0]?.results || [];
@@ -20,7 +20,7 @@ async function d1Query(sql) {
 async function d1Exec(sql) {
   const tmpFile = '/tmp/d1_batch.sql';
   fs.writeFileSync(tmpFile, sql);
-  const cmd = `CLOUDFLARE_API_TOKEN=REDACTED_CLOUDFLARE_TOKEN npx wrangler d1 execute ${DB_NAME} --remote --file=${tmpFile} 2>/dev/null`;
+  const cmd = `CLOUDFLARE_API_TOKEN=${process.env.CLOUDFLARE_API_TOKEN} npx wrangler d1 execute ${DB_NAME} --remote --file=${tmpFile} 2>/dev/null`;
   execSync(cmd, { timeout: 60000 });
   return true;
 }

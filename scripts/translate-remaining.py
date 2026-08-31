@@ -2,7 +2,7 @@
 """Translate remaining missing _en fields"""
 import subprocess, json, urllib.request, urllib.parse, time
 
-TOKEN = 'REDACTED_CLOUDFLARE_TOKEN'
+TOKEN = 'os.environ.get('CLOUDFLARE_API_TOKEN', 'YOUR_TOKEN_HERE')'
 
 def query(sql):
     cmd = f'CLOUDFLARE_API_TOKEN={TOKEN} npx wrangler d1 execute aiqury-db --remote --command="{sql}" --json 2>/dev/null'

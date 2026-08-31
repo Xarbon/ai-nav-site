@@ -6,7 +6,7 @@ import subprocess, json, sys, time, urllib.request, urllib.parse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 DB_NAME = 'aiqury-db'
-TOKEN = 'REDACTED_CLOUDFLARE_TOKEN'
+TOKEN = 'os.environ.get('CLOUDFLARE_API_TOKEN', 'YOUR_TOKEN_HERE')'
 
 def d1_query(sql):
     cmd = f'CLOUDFLARE_API_TOKEN={TOKEN} npx wrangler d1 execute {DB_NAME} --remote --command="{sql}" --json 2>/dev/null'
