@@ -3,17 +3,19 @@
 /**
  * AI工具自动采集系统
  * 
- * 功能：
- * 1. 从 Product Hunt 采集新产品
- * 2. 从 GitHub Trending 采集开源AI工具
- * 3. 数据清洗和去重
- * 4. 自动补全缺失字段（翻译、OPC场景等）
- * 5. 写入 D1 数据库
- * 6. 生成采集报告
+ * 数据源：
+ * 1. Product Hunt - 新产品发布
+ * 2. GitHub Trending - 开源AI项目
+ * 3. Toolify.ai - AI工具导航站
+ * 4. There's An AI For That - AI工具数据库
+ * 5. FutureTools - AI工具聚合
  */
 
 import { collectFromProductHunt } from './sources/producthunt.js';
 import { collectFromGitHub } from './sources/github.js';
+import { collectFromToolify } from './sources/toolify.js';
+import { collectFromTAAFT } from './sources/theresanaiforthat.js';
+import { collectFromFutureTools } from './sources/futuretools.js';
 import { processTools } from './processors/main.js';
 import { batchInsertTools, checkExistingTools } from './db/d1.js';
 import { saveReport } from './utils/report.js';
@@ -27,100 +29,158 @@ async function main() {
     startTime: new Date().toISOString(),
     sources: {
       product_hunt: { collected: 0, new: 0, errors: [] },
-      github: { collected: 0, new: 0, errors: [] }
+      github: { collected: 0, new: 0, errors: [] },
+      toolify: { collected: 0, new: 0, errors: [] },
+      taft: { collected: 0, new: 0, errors: [] },
+      futuretools: { collected: 0, new: 0, errors: [] }
     },
     total: { collected: 0, processed: 0, inserted: 0, skipped: 0, errors: [] }
   };
 
+  const allTools = [];
+
+  // ===== 1. 从各个数据源采集 =====
+
+  // Product Hunt
+  log('📡 采集 Product Hunt...', LogLevels.INFO);
   try {
-    // 1. 从 Product Hunt 采集
-    log('📡 采集 Product Hunt...', LogLevels.INFO);
-    try {
-      const phTools = await collectFromProductHunt();
-      report.sources.product_hunt.collected = phTools.length;
-      log(`✅ Product Hunt: 采集到 ${phTools.length} 个工具`, LogLevels.SUCCESS);
-      
-      // 2. 从 GitHub Trending 采集
-      log('📡 采集 GitHub Trending...', LogLevels.INFO);
-      const ghTools = await collectFromGitHub();
-      report.sources.github.collected = ghTools.length;
-      log(`✅ GitHub: 采集到 ${ghTools.length} 个工具`, LogLevels.SUCCESS);
+    const tools = await collectFromProductHunt();
+    report.sources.product_hunt.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ Product Hunt: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.product_hunt.errors.push(error.message);
+    log(`❌ Product Hunt: ${error.message}`, LogLevels.ERROR);
+  }
 
-      // 3. 合并所有工具
-      const allTools = [...phTools, ...ghTools];
-      report.total.collected = allTools.length;
-      log(`📊 总共采集到 ${allTools.length} 个工具`, LogLevels.INFO);
+  // GitHub Trending
+  log('📡 采集 GitHub Trending...', LogLevels.INFO);
+  try {
+    const tools = await collectFromGitHub();
+    report.sources.github.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ GitHub: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.github.errors.push(error.message);
+    log(`❌ GitHub: ${error.message}`, LogLevels.ERROR);
+  }
 
-      // 4. 检查已存在的工具
-      const existingUrls = await checkExistingTools();
-      const newTools = allTools.filter(tool => !existingUrls.has(tool.url));
-      log(`🔍 去重后: ${newTools.length} 个新工具`, LogLevels.INFO);
+  // Toolify.ai
+  log('📡 采集 Toolify.ai...', LogLevels.INFO);
+  try {
+    const tools = await collectFromToolify();
+    report.sources.toolify.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ Toolify.ai: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.toolify.errors.push(error.message);
+    log(`❌ Toolify.ai: ${error.message}`, LogLevels.ERROR);
+  }
 
-      // 5. 处理工具数据（翻译、生成场景等）
-      log('🔄 处理工具数据...', LogLevels.INFO);
-      const processedTools = await processTools(newTools);
-      report.total.processed = processedTools.length;
-      log(`✅ 处理完成: ${processedTools.length} 个工具`, LogLevels.SUCCESS);
+  // There's An AI For That
+  log('📡 采集 There\'s An AI For That...', LogLevels.INFO);
+  try {
+    const tools = await collectFromTAAFT();
+    report.sources.taft.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ TAAFT: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.taft.errors.push(error.message);
+    log(`❌ TAAFT: ${error.message}`, LogLevels.ERROR);
+  }
 
-      // 6. 批量写入数据库
-      if (processedTools.length > 0) {
-        log('💾 写入数据库...', LogLevels.INFO);
-        const insertResult = await batchInsertTools(processedTools);
-        report.total.inserted = insertResult.success;
-        report.total.skipped = insertResult.skipped;
-        report.total.errors = insertResult.errors;
-        log(`✅ 成功插入 ${insertResult.success} 个工具`, LogLevels.SUCCESS);
-        if (insertResult.skipped > 0) {
-          log(`⚠️  跳过 ${insertResult.skipped} 个工具`, LogLevels.WARNING);
-        }
-      }
+  // FutureTools
+  log('📡 采集 FutureTools...', LogLevels.INFO);
+  try {
+    const tools = await collectFromFutureTools();
+    report.sources.futuretools.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ FutureTools: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.futuretools.errors.push(error.message);
+    log(`❌ FutureTools: ${error.message}`, LogLevels.ERROR);
+  }
 
-      // 更新各数据源的新增数量
-      report.sources.product_hunt.new = phTools.filter(t => 
-        processedTools.some(pt => pt.url === t.url)
-      ).length;
-      report.sources.github.new = ghTools.filter(t => 
-        processedTools.some(pt => pt.url === t.url)
-      ).length;
+  // ===== 2. 合并 + 去重 =====
+  report.total.collected = allTools.length;
+  log(`📊 总共采集: ${allTools.length} 个工具`, LogLevels.INFO);
 
-    } catch (error) {
-      if (error.message.includes('Product Hunt')) {
-        report.sources.product_hunt.errors.push(error.message);
-        log(`❌ Product Hunt 采集失败: ${error.message}`, LogLevels.ERROR);
-      } else if (error.message.includes('GitHub')) {
-        report.sources.github.errors.push(error.message);
-        log(`❌ GitHub 采集失败: ${error.message}`, LogLevels.ERROR);
-      } else {
-        throw error;
-      }
+  // 按 URL 去重（保留第一个）
+  const urlSeen = new Set();
+  const uniqueTools = [];
+  for (const tool of allTools) {
+    const normalizedUrl = tool.url?.replace(/\/$/, '').toLowerCase();
+    if (normalizedUrl && !urlSeen.has(normalizedUrl)) {
+      urlSeen.add(normalizedUrl);
+      uniqueTools.push(tool);
+    }
+  }
+  log(`🔗 URL 去重后: ${uniqueTools.length} 个`, LogLevels.INFO);
+
+  // ===== 3. 数据库去重 =====
+  try {
+    const existingUrls = await checkExistingTools();
+    const newTools = uniqueTools.filter(tool => {
+      const normalizedUrl = tool.url?.replace(/\/$/, '').toLowerCase();
+      return !existingUrls.has(normalizedUrl) && !existingUrls.has(tool.url);
+    });
+    log(`🆕 数据库去重后: ${newTools.length} 个新工具`, LogLevels.INFO);
+
+    // ===== 4. AI 处理（翻译、补全）=====
+    log('🔄 处理工具数据...', LogLevels.INFO);
+    const processedTools = await processTools(newTools);
+    report.total.processed = processedTools.length;
+    log(`✅ 处理完成: ${processedTools.length} 个`, LogLevels.SUCCESS);
+
+    // ===== 5. 写入数据库 =====
+    if (processedTools.length > 0) {
+      log('💾 写入 D1 数据库...', LogLevels.INFO);
+      const insertResult = await batchInsertTools(processedTools);
+      report.total.inserted = insertResult.success;
+      report.total.skipped = insertResult.skipped;
+      report.total.errors = insertResult.errors;
+      log(`✅ 入库: ${insertResult.success} 个, 跳过: ${insertResult.skipped} 个`, LogLevels.SUCCESS);
+    }
+
+    // 统计各数据源新增
+    const sourceMap = {
+      producthunt: 'product_hunt',
+      github: 'github',
+      toolify: 'toolify',
+      theresanaiforthat: 'taft',
+      futuretools: 'futuretools'
+    };
+    for (const key of Object.keys(sourceMap)) {
+      const dbKey = sourceMap[key];
+      report.sources[dbKey].new = processedTools.filter(t => t.source === key).length;
     }
 
   } catch (error) {
-    log(`❌ 采集过程中发生错误: ${error.message}`, LogLevels.ERROR);
+    log(`❌ 处理/入库失败: ${error.message}`, LogLevels.ERROR);
     report.total.errors.push(error.message);
-    report.error = error.stack;
-  } finally {
-    // 7. 生成报告
-    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-    report.endTime = new Date().toISOString();
-    report.duration = `${duration}s`;
-    
-    log('\n📋 采集报告', LogLevels.INFO);
-    log(`  总耗时: ${duration}s`, LogLevels.INFO);
-    log(`  Product Hunt: ${report.sources.product_hunt.collected} 个 (新增 ${report.sources.product_hunt.new})`, LogLevels.INFO);
-    log(`  GitHub: ${report.sources.github.collected} 个 (新增 ${report.sources.github.new})`, LogLevels.INFO);
-    log(`  总计: ${report.total.collected} → ${report.total.inserted} 个新工具入库`, LogLevels.INFO);
+  }
 
-    await saveReport(report);
-    log('📄 报告已保存到 reports/', LogLevels.SUCCESS);
+  // ===== 6. 生成报告 =====
+  const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+  report.endTime = new Date().toISOString();
+  report.duration = `${duration}s`;
 
-    // 8. 输出退出码
-    if (report.total.errors.length > 0) {
-      process.exit(1);
-    } else {
-      log('✨ 采集完成!', LogLevels.SUCCESS);
-      process.exit(0);
-    }
+  log('\n📋 采集报告', LogLevels.INFO);
+  log(`  总耗时: ${duration}s`, LogLevels.INFO);
+  log(`  Product Hunt: ${report.sources.product_hunt.collected} 个 (新增 ${report.sources.product_hunt.new})`, LogLevels.INFO);
+  log(`  GitHub: ${report.sources.github.collected} 个 (新增 ${report.sources.github.new})`, LogLevels.INFO);
+  log(`  Toolify.ai: ${report.sources.toolify.collected} 个 (新增 ${report.sources.toolify.new})`, LogLevels.INFO);
+  log(`  TAAFT: ${report.sources.taft.collected} 个 (新增 ${report.sources.taft.new})`, LogLevels.INFO);
+  log(`  FutureTools: ${report.sources.futuretools.collected} 个 (新增 ${report.sources.futuretools.new})`, LogLevels.INFO);
+  log(`  合计: ${report.total.collected} → ${report.total.inserted} 个新工具入库`, LogLevels.INFO);
+
+  await saveReport(report);
+
+  if (report.total.errors.length > 0) {
+    process.exit(1);
+  } else {
+    log('✨ 采集完成!', LogLevels.SUCCESS);
+    process.exit(0);
   }
 }
 

@@ -1,0 +1,43 @@
+{
+  "startTime": "2026-08-31T14:04:34.076Z",
+  "sources": {
+    "product_hunt": {
+      "collected": 0,
+      "new": 0,
+      "errors": [
+        "Product Hunt API token not configured"
+      ]
+    },
+    "github": {
+      "collected": 25,
+      "new": 19,
+      "errors": []
+    },
+    "toolify": {
+      "collected": 0,
+      "new": 0,
+      "errors": []
+    },
+    "taft": {
+      "collected": 0,
+      "new": 0,
+      "errors": []
+    },
+    "futuretools": {
+      "collected": 0,
+      "new": 0,
+      "errors": []
+    }
+  },
+  "total": {
+    "collected": 25,
+    "processed": 19,
+    "inserted": 10,
+    "skipped": 0,
+    "errors": [
+      "Batch 10-20: D1 API error: 400"
+    ]
+  },
+  "endTime": "2026-08-31T14:04:48.609Z",
+  "duration": "14.54s"
+}
