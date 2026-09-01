@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { ToolJsonLd } from '@/components/seo/ToolJsonLd';
 import { ScoreRate } from '@/components/score/ScoreRate';
 import { BannerAd } from '@/components/ads/BannerAd';
+import { TrafficTrend } from '@/components/tool/TrafficTrend';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -104,7 +105,17 @@ export default async function ToolDetailPage({ params }: Props) {
   const tool = await cachedQuery('tool-' + slug + '-v2', () => getToolBySlug(slug, locale), 600);
   if (!tool) notFound();
 
-  const relatedTools = await getRelatedTools(tool.category, tool.sub_category, tool.slug, locale);
+  // Fetch traffic data
+    const trafficData = await cachedQuery('traffic_' + slug, async () => {
+      const { getDB } = await import('@/lib/d1/client');
+      const db = getDB();
+      const { results } = await db.prepare(
+        'SELECT month, visits, growth_rate FROM tool_traffic WHERE tool_slug = ? ORDER BY month ASC'
+      ).bind(slug).all();
+      return results;
+    }, 3600);
+
+    const relatedTools = await getRelatedTools(tool.category, tool.sub_category, tool.slug, locale);
 
 
 
@@ -240,6 +251,13 @@ export default async function ToolDetailPage({ params }: Props) {
                 />
               </div>
             </div>
+
+            {/* Traffic Trend */}
+            {trafficData && trafficData.length > 0 && (
+              <div className="mb-4">
+                <TrafficTrend data={trafficData} locale={locale} />
+              </div>
+            )}
 
             {/* 2. OPC Scenarios */}
             {opcScenarios.length > 0 && (
