@@ -89,8 +89,11 @@ export async function getTools(options?: {
 // 根据 slug 获取单个工具（按 locale 过滤，en locale 自动查找 slug-en）
 export async function getToolBySlug(slug: string, locale: string = 'zh'): Promise<any> {
   const db = getDB();
-  // en locale 的记录使用 slug-en 后缀
-  const dbSlug = locale === 'en' ? `${slug}-en` : slug;
+  // en locale 的记录使用 slug-en 后缀，但避免重复添加
+  let dbSlug = slug;
+  if (locale === 'en' && !slug.endsWith('-en')) {
+    dbSlug = `${slug}-en`;
+  }
   const row = await db.prepare(
     `SELECT * FROM tools WHERE slug = ? AND status = ? AND locale = ?`
   ).bind(dbSlug, 'active', locale).first();
