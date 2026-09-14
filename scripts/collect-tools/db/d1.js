@@ -34,7 +34,8 @@ export async function checkExistingTools() {
     );
 
     if (!response.ok) {
-      throw new Error(`D1 API error: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`D1 API error: ${response.status} - ${errorText.substring(0, 300)}`);
     }
 
     const data = await response.json();
@@ -67,13 +68,12 @@ export async function batchInsertTools(tools) {
 
   log(`开始插入 ${tools.length} 个工具到 D1...`, LogLevels.INFO);
 
-  // 批量插入，每批 10 个
-  const batchSize = 10;
-  for (let i = 0; i < tools.length; i += batchSize) {
-    const batch = tools.slice(i, i + batchSize);
+  // 逐条插入，避免批量失败
+  for (let i = 0; i < tools.length; i++) {
+    const tool = tools[i];
     
     try {
-      const sql = buildInsertSQL(batch);
+      const sql = buildInsertSQL(tool);
       
       const response = await fetch(
         `${CLOUDFLARE_API_BASE}/accounts/${accountId}/d1/database/${databaseId}/query`,
@@ -88,73 +88,109 @@ export async function batchInsertTools(tools) {
       );
 
       if (!response.ok) {
-        throw new Error(`D1 API error: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`D1 API error: ${response.status} - ${errorText.substring(0, 500)}`);
       }
 
-      result.success += batch.length;
+      result.success++;
       
-      if ((i + batchSize) % 50 === 0) {
-        log(`  已插入 ${i + batchSize}/${tools.length}`, LogLevels.DEBUG);
+      if ((i + 1) % 10 === 0) {
+        log(`  已插入 ${i + 1}/${tools.length}`, LogLevels.INFO);
       }
 
     } catch (error) {
-      log(`  ❌ 批量插入失败: ${error.message}`, LogLevels.ERROR);
-      result.errors.push(`Batch ${i}-${i + batchSize}: ${error.message}`);
+      log(`  ❌ 插入失败 [${tool.name}]: ${error.message.substring(0, 200)}`, LogLevels.ERROR);
+      result.errors.push(`${tool.slug}: ${error.message.substring(0, 100)}`);
     }
 
     // 避免请求过快
-    await sleep(500);
+    await sleep(200);
   }
 
-  log(`插入完成: ${result.success} 成功, ${result.skipped} 跳过`, LogLevels.SUCCESS);
+  log(`插入完成: ${result.success} 成功, ${tools.length - result.success} 失败`, LogLevels.SUCCESS);
+  if (result.errors.length > 0) {
+    log(`错误详情 (前5个):`, LogLevels.WARNING);
+    result.errors.slice(0, 5).forEach(e => log(`  - ${e}`, LogLevels.WARNING));
+  }
   return result;
 }
 
-function buildInsertSQL(tools) {
-  const values = tools.map(tool => {
-    const fields = [
-      `'${escapeSql(tool.slug)}'`,
-      `'${escapeSql(tool.name)}'`,
-      `'${escapeSql(tool.name_en || tool.name)}'`,
-      `'${escapeSql(tool.url)}'`,
-      `'${escapeSql(tool.description)}'`,
-      `'${escapeSql(tool.description_en || tool.description)}'`,
-      `'${escapeSql(tool.category)}'`,
-      `'${escapeSql(tool.sub_category || '')}'`,
-      `'${JSON.stringify(tool.tags || [])}'`,
-      `'${escapeSql(tool.pricing || 'Free')}'`,
-      `'${escapeSql(tool.pricing_detail || '')}'`,
-      `'${JSON.stringify(tool.language || ['en', 'zh'])}'`,
-      `${tool.rating || 0}`,
-      `'${JSON.stringify(tool.opc_scenario || [])}'`,
-      `'${escapeSql(tool.payment_info || '')}'`,
-      `'${escapeSql(tool.cn_access || 'accessible')}'`,
-      `'${JSON.stringify(tool.pros || [])}'`,
-      `'${JSON.stringify(tool.cons || [])}'`,
-      `'${JSON.stringify(tool.core_capabilities || [])}'`,
-      `'${tool.run_mode || 'web'}'`,
-      `'${tool.hardware_level || 'none'}'`,
-      `'${tool.learn_level || 'easy'}'`,
-      `${tool.is_hot ? 1 : 0}`,
-      `${tool.is_recommended ? 1 : 0}`,
-      `${tool.is_new ? 1 : 0}`,
-      `${tool.is_featured ? 1 : 0}`,
-      `'${escapeSql(tool.affiliate_url || '')}'`,
-      `'${escapeSql(tool.workflow || '')}'`,
-      `${tool.sort_order || 999}`,
-      `'${escapeSql(tool.status || 'draft')}'`
-    ];
-    return `(${fields.join(', ')})`;
-  }).join(',\n');
+function buildInsertSQL(tool) {
+  const now = new Date().toISOString();
+  
+  const columns = [
+    'id', 'slug', 'name', 'name_en', 'url', 'description', 'description_en',
+    'detail', 'detail_en', 'icon_url', 'category', 'sub_category', 'audience_tags',
+    'pricing', 'pricing_detail', 'language', 'rating', 'tags',
+    'is_hot', 'is_recommended', 'is_new', 'is_featured',
+    'affiliate_url', 'workflow', 'sort_order', 'status',
+    'created_at', 'updated_at', 'run_mode', 'hardware_level', 'learn_level',
+    'hardware_note', 'commercial_notice', 'business_question_list',
+    'seo_title', 'seo_meta_desc', 'opc_scenario', 'payment_info', 'cn_access',
+    'pros', 'cons', 'core_capabilities',
+    'copyright_note', 'pricing_note', 'access_note', 'difficulty_note', 'capability_note', 'scenario_note',
+    'opc_scenario_en', 'core_capabilities_en', 'pros_en', 'cons_en', 'business_question_list_en', 'payment_info_en',
+    'locale'
+  ];
 
-  return `INSERT INTO tools (
-    slug, name, name_en, url, description, description_en,
-    category, sub_category, tags, pricing, pricing_detail,
-    language, rating, opc_scenario, payment_info, cn_access,
-    pros, cons, core_capabilities, run_mode, hardware_level,
-    learn_level, is_hot, is_recommended, is_new, is_featured,
-    affiliate_url, workflow, sort_order, status
-  ) VALUES\n${values}`;
+  const values = [
+    `lower(hex(randomblob(16)))`,
+    strVal(tool.slug),
+    strVal(tool.name),
+    strVal(tool.name_en || tool.name),
+    strVal(tool.url),
+    strVal(tool.description),
+    strVal(tool.description_en || tool.description),
+    'NULL',
+    'NULL',
+    strVal(tool.icon_url || ''),
+    strVal(tool.category),
+    strVal(tool.sub_category || ''),
+    strVal(JSON.stringify(tool.audience_tags || [])),
+    strVal(tool.pricing || 'Free'),
+    strVal(tool.pricing_detail || ''),
+    strVal(JSON.stringify(tool.language || ['en', 'zh'])),
+    `${tool.rating || 0}`,
+    strVal(JSON.stringify(tool.tags || [])),
+    `${tool.is_hot ? 1 : 0}`,
+    `${tool.is_recommended ? 1 : 0}`,
+    `${tool.is_new ? 1 : 0}`,
+    `${tool.is_featured ? 1 : 0}`,
+    strVal(tool.affiliate_url || ''),
+    strVal(tool.workflow || ''),
+    `${tool.sort_order || 999}`,
+    strVal(tool.status || 'draft'),
+    strVal(now),
+    strVal(now),
+    strVal(tool.run_mode || 'web'),
+    strVal(tool.hardware_level || 'none'),
+    strVal(tool.learn_level || 'easy'),
+    'NULL',
+    strVal(tool.commercial_notice || ''),
+    strVal(JSON.stringify(tool.business_question_list || [])),
+    'NULL',
+    'NULL',
+    strVal(JSON.stringify(tool.opc_scenario || [])),
+    strVal(tool.payment_info || ''),
+    strVal(tool.cn_access || 'accessible'),
+    strVal(JSON.stringify(tool.pros || [])),
+    strVal(JSON.stringify(tool.cons || [])),
+    strVal(JSON.stringify(tool.core_capabilities || [])),
+    'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL',
+    'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL',
+    strVal(tool.locale || 'zh')
+  ];
+
+  return `INSERT INTO tools (${columns.join(', ')}) VALUES (${values.join(', ')})`;
+}
+
+function strVal(str) {
+  if (str === null || str === undefined || str === '') return "''";
+  // Escape single quotes and remove control characters
+  const clean = String(str)
+    .replace(/'/g, "''")
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
+  return `'${clean}'`;
 }
 
 function escapeSql(str) {
