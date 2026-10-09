@@ -57,7 +57,7 @@ export function MobileMenu({isZh}: Props) {
         <nav className="p-4 overflow-y-auto" style={{maxHeight: 'calc(100vh - 80px)'}}>
           <div className="mb-6">
             <Link
-              href="/"
+              href={isZh ? '/zh' : '/en'}
               onClick={() => setIsOpen(false)}
               className="block py-3 px-4 rounded-lg hover:bg-[var(--bg-hover)] font-medium"
               style={{color: 'var(--text-title)'}}
@@ -65,7 +65,7 @@ export function MobileMenu({isZh}: Props) {
               {isZh ? '首页' : 'Home'}
             </Link>
             <Link
-              href="/search"
+              href={`/${isZh ? "zh" : "en"}/search`}
               onClick={() => setIsOpen(false)}
               className="block py-3 px-4 rounded-lg hover:bg-[var(--bg-hover)] font-medium"
               style={{color: 'var(--text-title)'}}
@@ -81,7 +81,7 @@ export function MobileMenu({isZh}: Props) {
             {categoriesData.categories.map((category) => (
               <Link
                 key={category.slug}
-                href={`/category/${category.slug}`}
+                href={`/${isZh ? 'zh' : 'en'}/category/${category.slug}`}
                 onClick={() => setIsOpen(false)}
                 className="block py-3 px-4 rounded-lg hover:bg-[var(--bg-hover)]"
                 style={{color: 'var(--text-body)'}}
