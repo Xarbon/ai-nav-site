@@ -70,6 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     verification: {
       google: 'google-site-verification-token', // 需要替换为实际token
       yandex: 'yandex-verification-token',
+      baidu: 'codeva-iBBXe7BuFB',
     },
     icons: {
       icon: [
