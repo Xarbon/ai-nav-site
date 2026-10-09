@@ -61,7 +61,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             return (
               <a
                 key={cat.slug}
-                href={`/category/${cat.slug}`}
+                href={`/${locale}/category/${cat.slug}`}
                 className={`flex items-center gap-2 px-3 py-2.5 text-sm rounded-lg transition ${
                   isActive ? 'bg-[var(--bg-hover)] font-medium' : 'hover:bg-[var(--bg-hover)]'
                 }`}
@@ -113,7 +113,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             </div>
             <div className="flex flex-wrap gap-2">
               <a
-                href={`/category/${slug}`}
+                href={`/${locale}/category/${slug}`}
                 className={`px-4 py-2 rounded-lg text-sm transition ${
                   !sub ? 'bg-[var(--color-model)] text-white' : 'bg-white border border-[var(--border-color)] text-[var(--text-body)] hover:bg-[var(--bg-hover)]'
                 }`}
@@ -123,7 +123,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
               {subCategories.map((sc: any) => (
                 <a
                   key={sc.slug}
-                  href={`/category/${slug}?sub=${sc.slug}`}
+                  href={`/${locale}/category/${slug}?sub=${sc.slug}`}
                   className={`px-4 py-2 rounded-lg text-sm transition ${
                     sub === sc.slug ? 'bg-[var(--color-model)] text-white' : 'bg-white border border-[var(--border-color)] text-[var(--text-body)] hover:bg-[var(--bg-hover)]'
                   }`}
