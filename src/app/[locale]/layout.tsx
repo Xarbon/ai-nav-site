@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       yandex: 'yandex-verification-token',
     },
     other: {
-      'baidu-site-verification': 'codeva-iBBXe7BuFB',
+      'baidu-site-verification': 'codeva-jC48G6wwXl',
     },
     icons: {
       icon: [
