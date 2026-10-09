@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "AIqury - Find AI Tools By Your Questions",
   description: "面向一人公司、跨境电商和自媒体的 AI 工具导航，按真实业务场景分类。",
+  other: {
+    'baidu-site-verification': 'codeva-jC48G6wwXl',
+  },
   icons: {
     icon: [
       { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
