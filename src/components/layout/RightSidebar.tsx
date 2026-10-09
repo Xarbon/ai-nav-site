@@ -74,7 +74,7 @@ export function RightSidebar({ isZh, hotTools, newTools, recommendedTools, defau
           return (
             <a
               key={tool.id}
-              href={`/tool/${tool.slug}`}
+              href={`/${isZh ? "zh" : "en"}/tool/${tool.slug}`}
               className="flex items-center gap-3 p-2 rounded-lg transition hover:bg-[var(--bg-hover)] group"
             >
               <span className="text-xs font-bold w-5 text-center" style={{
