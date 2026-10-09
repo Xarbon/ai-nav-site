@@ -52,7 +52,7 @@ export function ToolCard({ tool, isZh = true }: Props) {
 
   return (
     <Link
-      href={`/tool/${tool.slug}`}
+      href={`/${isZh ? "zh" : "en"}/tool/${tool.slug}`}
       className="group block bg-white border border-[var(--border-color)] rounded-xl p-5 hover:shadow-[var(--shadow-md)] transition-all duration-200"
     >
       {/* Abnormal status warning */}
