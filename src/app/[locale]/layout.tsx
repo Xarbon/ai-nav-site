@@ -1,4 +1,5 @@
 import type {Metadata} from 'next';
+import Script from 'next/script';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
@@ -126,6 +127,19 @@ export default async function LocaleLayout({
             })();
           `}} />
         )}
+      {GoogleAdSense && <GoogleAdSense />}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8Z6S9XBM2K"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8Z6S9XBM2K');
+          `}
+        </Script>
       </head>
       <body style={{background: '#FFFFFF', color: 'var(--text-body)'}}>
         <NextIntlClientProvider locale={locale} messages={messages}>
