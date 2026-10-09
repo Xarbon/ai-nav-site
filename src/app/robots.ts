@@ -14,6 +14,10 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: ['GPTBot', 'ChatGPT-user', 'PerplexityBot', 'ClaudeBot', 'Google-Extended'],
         allow: '/',
       },
+      {
+        userAgent: 'Baiduspider',
+        allow: '/',
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
   };
