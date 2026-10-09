@@ -2,10 +2,11 @@ import Link from 'next/link';
 import categoriesData from '@/data/categories.json';
 
 interface Props {
+  locale: string;
   currentCategory?: string;
 }
 
-export function Sidebar({currentCategory}: Props) {
+export function Sidebar({locale, currentCategory}: Props) {
   return (
     <aside className="sidebar min-h-[calc(100vh-64px)]">
       <nav className="space-y-1">
@@ -17,7 +18,7 @@ export function Sidebar({currentCategory}: Props) {
           return (
             <Link
               key={category.slug}
-              href={`/category/${category.slug}`}
+              href={`/${locale}/category/${category.slug}`}
               className={`sidebar-menu-item block ${isActive ? 'active' : ''}`}
             >
               {category.name}
