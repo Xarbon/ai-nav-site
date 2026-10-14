@@ -1,5 +1,4 @@
 import type {Metadata} from 'next';
-import Script from 'next/script';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
@@ -69,11 +68,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     verification: {
-      google: 'google-site-verification-token', // 需要替换为实际token
+      google: 'qVenI48MQnvUE-mdhllS1tLbBeyL1mdJ_hdymeTxLFU',
       yandex: 'yandex-verification-token',
     },
     other: {
-      'baidu-site-verification': 'codeva-jC48G6wwXl',
+      'baidu-site-verification': 'codeva-iBBXe7BuFB',
     },
     icons: {
       icon: [
@@ -127,19 +126,6 @@ export default async function LocaleLayout({
             })();
           `}} />
         )}
-      {GoogleAdSense && <GoogleAdSense />}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-8Z6S9XBM2K"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-8Z6S9XBM2K');
-          `}
-        </Script>
       </head>
       <body style={{background: '#FFFFFF', color: 'var(--text-body)'}}>
         <NextIntlClientProvider locale={locale} messages={messages}>
