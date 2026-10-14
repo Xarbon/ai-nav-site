@@ -7,6 +7,9 @@ import { ToolJsonLd } from '@/components/seo/ToolJsonLd';
 import { ScoreRate } from '@/components/score/ScoreRate';
 import { BannerAd } from '@/components/ads/BannerAd';
 import { TrafficTrend } from '@/components/tool/TrafficTrend';
+import { AnchorNav } from '@/components/tool/AnchorNav';
+import { QuickVote } from '@/components/tool/QuickVote';
+import { RelatedToolCard } from '@/components/tool/RelatedToolCard';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -170,6 +173,11 @@ export default async function ToolDetailPage({ params }: Props) {
         </div>
       )}
 
+      {/* Anchor Nav */}
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6">
+        <AnchorNav isZh={isZh} />
+      </div>
+
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 py-4 md:py-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs mb-3" style={{ color: '#9CA3AF' }} aria-label="Breadcrumb">
@@ -196,7 +204,7 @@ export default async function ToolDetailPage({ params }: Props) {
           <div className="flex-1 min-w-0">
 
             {/* 1. Header Card */}
-            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 md:p-5 mb-4">
+            <div id="overview" className="bg-white border border-[#E5E7EB] rounded-2xl p-4 md:p-5 mb-4">
               <div className="flex items-start gap-3 mb-3">
                 <img src={tool.icon_url || '/logo-icon.svg'} alt={displayName} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -282,7 +290,7 @@ export default async function ToolDetailPage({ params }: Props) {
 
             {/* 3. Core Capabilities */}
             {coreCapabilities.length > 0 && (
-              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 mb-4">
+              <div id="capabilities" className="bg-white border border-[#E5E7EB] rounded-2xl p-4 mb-4">
                 <h2 className="text-sm font-bold mb-2" style={{ color: '#0E3A7A' }}>
                   📋 {isZh ? '核心能力' : 'Core Capabilities'}
                 </h2>
@@ -386,7 +394,7 @@ export default async function ToolDetailPage({ params }: Props) {
 
             {/* 6. Detailed Description */}
             {displayDetail && (
-              <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 mb-4">
+              <div id="details" className="bg-white border border-[#E5E7EB] rounded-2xl p-4 mb-4">
                 <h2 className="text-sm font-bold mb-2" style={{ color: '#0E3A7A' }}>
                   📖 {isZh ? '详细介绍' : 'Details'}
                 </h2>
@@ -411,12 +419,17 @@ export default async function ToolDetailPage({ params }: Props) {
             {/* Ad */}
             <div className="mb-4"><BannerAd slot="inline" isZh={isZh} /></div>
 
+            {/* Quick Vote */}
+            <QuickVote toolSlug={tool.slug} toolName={tool.name} isZh={isZh} />
+
             {/* 8. Score */}
-            <div className="mb-4">
+            <div id="reviews" className="mb-4">
               <ScoreRate toolSlug={tool.slug} toolName={tool.name} category={tool.category} isZh={isZh} />
             </div>
 
             {/* 9. Alternative Tools */}
+            {/* eslint-disable-next-line */}
+            <span id="related" />
             {relatedTools.length > 0 && (
               <div className="mb-4">
                 <h2 className="text-sm font-bold mb-2" style={{ color: '#0E3A7A' }}>
@@ -499,21 +512,16 @@ export default async function ToolDetailPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Quick related tools */}
+              {/* Quick related tools - card style */}
               {relatedTools.length > 0 && (
                 <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4">
                   <h4 className="text-xs font-bold mb-2" style={{ color: '#0E3A7A' }}>
                     🔁 {isZh ? '相关工具' : 'Related'}
                   </h4>
-                  <div className="flex flex-col gap-1.5">
-                    {relatedTools.slice(0, 5).map((t: any) => {
-                      const tName = isZh ? t.name : (t.name_en || t.name);
-                      return (
-                        <a key={t.id} href={'/' + locale + '/tool/' + t.slug}
-                          className="text-xs px-2.5 py-1.5 rounded-lg border border-[#E5E7EB] transition hover:border-[#165DFF] hover:shadow-sm truncate"
-                          style={{ color: '#4E5969' }}>{tName}</a>
-                      );
-                    })}
+                  <div className="flex flex-col gap-2">
+                    {relatedTools.slice(0, 5).map((t: any) => (
+                      <RelatedToolCard key={t.id} tool={t} isZh={isZh} locale={locale} />
+                    ))}
                   </div>
                 </div>
               )}
