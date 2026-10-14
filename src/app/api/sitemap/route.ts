@@ -7,9 +7,9 @@ export async function GET() {
   const db = getDB();
   const baseUrl = 'https://aiqury.com';
   
-  // 只查询中文记录（locale='zh'），避免重复
+  // 查询所有 active 工具
   const { results: tools } = await db.prepare(
-    "SELECT slug FROM tools WHERE status = 'active' AND locale = 'zh'"
+    "SELECT slug, category FROM tools WHERE status = 'active'"
   ).all();
   
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -79,8 +79,17 @@ export async function GET() {
     xml += '  </url>\n';
   }
   
-  // 工具详情页（中英文）
+  // 按分类分组工具
+  const toolsByCategory: Record<string, string[]> = {};
   for (const tool of tools) {
+    const cat = tool.category || 'other';
+    if (!toolsByCategory[cat]) toolsByCategory[cat] = [];
+    toolsByCategory[cat].push(tool.slug);
+  }
+  
+  // 工具详情页（中英文）+ Alternatives 页面（中英文）
+  for (const tool of tools) {
+    // 工具详情页
     xml += '  <url>\n';
     xml += '    <loc>' + baseUrl + '/zh/tool/' + tool.slug + '</loc>\n';
     xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/tool/' + tool.slug + '"/>\n';
@@ -95,6 +104,57 @@ export async function GET() {
     xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/tool/' + tool.slug + '"/>\n';
     xml += '    <changefreq>weekly</changefreq>\n';
     xml += '    <priority>0.6</priority>\n';
+    xml += '  </url>\n';
+    
+    // Alternatives 页面（pSEO）
+    xml += '  <url>\n';
+    xml += '    <loc>' + baseUrl + '/zh/alternatives/' + tool.slug + '</loc>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/alternatives/' + tool.slug + '"/>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/alternatives/' + tool.slug + '"/>\n';
+    xml += '    <changefreq>weekly</changefreq>\n';
+    xml += '    <priority>0.5</priority>\n';
+    xml += '  </url>\n';
+    
+    xml += '  <url>\n';
+    xml += '    <loc>' + baseUrl + '/en/alternatives/' + tool.slug + '</loc>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/alternatives/' + tool.slug + '"/>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/alternatives/' + tool.slug + '"/>\n';
+    xml += '    <changefreq>weekly</changefreq>\n';
+    xml += '    <priority>0.5</priority>\n';
+    xml += '  </url>\n';
+  }
+  
+  // Compare 页面（VS 对比页 pSEO）
+  // 每个分类取前 8 个工具，生成两两对比组合
+  const comparePairs = new Set<string>();
+  for (const cat of Object.keys(toolsByCategory)) {
+    const catTools = toolsByCategory[cat].slice(0, 10);
+    for (let i = 0; i < catTools.length; i++) {
+      for (let j = i + 1; j < catTools.length; j++) {
+        const pair = [catTools[i], catTools[j]].sort().join('_');
+        comparePairs.add(pair);
+      }
+    }
+  }
+  
+  for (const pair of comparePairs) {
+    const [slugA, slugB] = pair.split('_');
+    // 中文对比页
+    xml += '  <url>\n';
+    xml += '    <loc>' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '</loc>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '"/>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/compare/' + slugA + '/' + slugB + '"/>\n';
+    xml += '    <changefreq>monthly</changefreq>\n';
+    xml += '    <priority>0.4</priority>\n';
+    xml += '  </url>\n';
+    
+    // 英文对比页
+    xml += '  <url>\n';
+    xml += '    <loc>' + baseUrl + '/en/compare/' + slugA + '/' + slugB + '</loc>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '"/>\n';
+    xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/compare/' + slugA + '/' + slugB + '"/>\n';
+    xml += '    <changefreq>monthly</changefreq>\n';
+    xml += '    <priority>0.4</priority>\n';
     xml += '  </url>\n';
   }
   
