@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 
 /**
- * AI工具自动采集系统
+ * AI工具自动采集系统 v2.0
  * 
- * 数据源：
+ * 数据源（7个）：
  * 1. Product Hunt - 新产品发布
  * 2. GitHub Trending - 开源AI项目
  * 3. Toolify.ai - AI工具导航站
  * 4. There's An AI For That - AI工具数据库
  * 5. FutureTools - AI工具聚合
+ * 6. Hacker News - 技术社区热门AI工具
+ * 7. TechCrunch AI - 科技媒体报道
+ * 8. BetaList - 新产品发布平台
  */
 
 import { collectFromProductHunt } from './sources/producthunt.js';
@@ -16,6 +19,9 @@ import { collectFromGitHub } from './sources/github.js';
 import { collectFromToolify } from './sources/toolify.js';
 import { collectFromTAAFT } from './sources/theresanaiforthat.js';
 import { collectFromFutureTools } from './sources/futuretools.js';
+import { collectFromHackerNews } from './sources/hackernews.js';
+import { collectFromTechCrunch } from './sources/techcrunch.js';
+import { collectFromBetaList } from './sources/betalist.js';
 import { processTools } from './processors/main.js';
 import { batchInsertTools, checkExistingTools } from './db/d1.js';
 import { saveReport } from './utils/report.js';
@@ -23,7 +29,7 @@ import { log, LogLevels } from './utils/logger.js';
 
 async function main() {
   const startTime = Date.now();
-  log('🚀 开始AI工具采集...', LogLevels.INFO);
+  log('🚀 开始AI工具采集 v2.0...', LogLevels.INFO);
 
   const report = {
     startTime: new Date().toISOString(),
@@ -32,7 +38,10 @@ async function main() {
       github: { collected: 0, new: 0, errors: [] },
       toolify: { collected: 0, new: 0, errors: [] },
       taft: { collected: 0, new: 0, errors: [] },
-      futuretools: { collected: 0, new: 0, errors: [] }
+      futuretools: { collected: 0, new: 0, errors: [] },
+      hackernews: { collected: 0, new: 0, errors: [] },
+      techcrunch: { collected: 0, new: 0, errors: [] },
+      betalist: { collected: 0, new: 0, errors: [] }
     },
     total: { collected: 0, processed: 0, inserted: 0, skipped: 0, errors: [] }
   };
@@ -65,6 +74,42 @@ async function main() {
     log(`❌ GitHub: ${error.message}`, LogLevels.ERROR);
   }
 
+  // Hacker News
+  log('📡 采集 Hacker News...', LogLevels.INFO);
+  try {
+    const tools = await collectFromHackerNews();
+    report.sources.hackernews.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ Hacker News: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.hackernews.errors.push(error.message);
+    log(`❌ Hacker News: ${error.message}`, LogLevels.ERROR);
+  }
+
+  // TechCrunch AI
+  log('📡 采集 TechCrunch AI...', LogLevels.INFO);
+  try {
+    const tools = await collectFromTechCrunch();
+    report.sources.techcrunch.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ TechCrunch AI: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.techcrunch.errors.push(error.message);
+    log(`❌ TechCrunch AI: ${error.message}`, LogLevels.ERROR);
+  }
+
+  // BetaList
+  log('📡 采集 BetaList...', LogLevels.INFO);
+  try {
+    const tools = await collectFromBetaList();
+    report.sources.betalist.collected = tools.length;
+    allTools.push(...tools);
+    log(`✅ BetaList: ${tools.length} 个`, LogLevels.SUCCESS);
+  } catch (error) {
+    report.sources.betalist.errors.push(error.message);
+    log(`❌ BetaList: ${error.message}`, LogLevels.ERROR);
+  }
+
   // Toolify.ai
   log('📡 采集 Toolify.ai...', LogLevels.INFO);
   try {
@@ -90,7 +135,7 @@ async function main() {
   }
 
   // FutureTools
-  log('📡 采集 FutureTools...', LogLevels.INFO);
+  log(' 采集 FutureTools...', LogLevels.INFO);
   try {
     const tools = await collectFromFutureTools();
     report.sources.futuretools.collected = tools.length;
@@ -105,14 +150,12 @@ async function main() {
   report.total.collected = allTools.length;
   log(`📊 总共采集: ${allTools.length} 个工具`, LogLevels.INFO);
 
-  // 按 URL 去重（保留第一个）
   const urlSeen = new Set();
   const slugSeen = new Set();
   const uniqueTools = [];
   for (const tool of allTools) {
     const normalizedUrl = tool.url?.replace(/\/$/, '').toLowerCase();
     const normalizedSlug = tool.slug?.toLowerCase();
-    // Skip if URL or slug already seen
     if ((normalizedUrl && urlSeen.has(normalizedUrl)) || 
         (normalizedSlug && slugSeen.has(normalizedSlug))) {
       continue;
@@ -154,7 +197,10 @@ async function main() {
       github: 'github',
       toolify: 'toolify',
       theresanaiforthat: 'taft',
-      futuretools: 'futuretools'
+      futuretools: 'futuretools',
+      hackernews: 'hackernews',
+      techcrunch: 'techcrunch',
+      betalist: 'betalist'
     };
     for (const key of Object.keys(sourceMap)) {
       const dbKey = sourceMap[key];
@@ -175,6 +221,9 @@ async function main() {
   log(`  总耗时: ${duration}s`, LogLevels.INFO);
   log(`  Product Hunt: ${report.sources.product_hunt.collected} 个 (新增 ${report.sources.product_hunt.new})`, LogLevels.INFO);
   log(`  GitHub: ${report.sources.github.collected} 个 (新增 ${report.sources.github.new})`, LogLevels.INFO);
+  log(`  Hacker News: ${report.sources.hackernews.collected} 个 (新增 ${report.sources.hackernews.new})`, LogLevels.INFO);
+  log(`  TechCrunch AI: ${report.sources.techcrunch.collected} 个 (新增 ${report.sources.techcrunch.new})`, LogLevels.INFO);
+  log(`  BetaList: ${report.sources.betalist.collected} 个 (新增 ${report.sources.betalist.new})`, LogLevels.INFO);
   log(`  Toolify.ai: ${report.sources.toolify.collected} 个 (新增 ${report.sources.toolify.new})`, LogLevels.INFO);
   log(`  TAAFT: ${report.sources.taft.collected} 个 (新增 ${report.sources.taft.new})`, LogLevels.INFO);
   log(`  FutureTools: ${report.sources.futuretools.collected} 个 (新增 ${report.sources.futuretools.new})`, LogLevels.INFO);
@@ -182,8 +231,6 @@ async function main() {
 
   await saveReport(report);
 
-  // Don't fail on insertion errors (e.g., duplicate slugs) - they're expected
-  // Only log them as warnings. The workflow should succeed as long as collection worked.
   log('✨ 采集完成!', LogLevels.SUCCESS);
   process.exit(0);
 }
@@ -192,4 +239,3 @@ main().catch(error => {
   console.error('Fatal error:', error);
   process.exit(1);
 });
-
