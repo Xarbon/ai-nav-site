@@ -10,6 +10,7 @@ import { TrafficTrend } from '@/components/tool/TrafficTrend';
 import { AnchorNav } from '@/components/tool/AnchorNav';
 import { QuickVote } from '@/components/tool/QuickVote';
 import { RelatedToolCard } from '@/components/tool/RelatedToolCard';
+import { ToolSelector } from '@/components/tool/ToolSelector';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -510,6 +511,32 @@ export default async function ToolDetailPage({ params }: Props) {
                     ))}
                   </div>
                 </div>
+              )}
+
+              {/* Smart Tool Selector */}
+              {relatedTools.length >= 2 && (
+                <ToolSelector
+                  currentTool={{
+                    slug: tool.slug,
+                    name: tool.name,
+                    description: tool.description || '',
+                    icon_url: tool.icon_url || '',
+                    pricing: tool.pricing || '',
+                    rating: tool.rating || 0,
+                    category: tool.category || '',
+                  }}
+                  relatedTools={relatedTools.slice(0, 6).map((t: any) => ({
+                    slug: t.slug,
+                    name: t.name,
+                    description: t.description || '',
+                    icon_url: t.icon_url || '',
+                    pricing: t.pricing || '',
+                    rating: t.rating || 0,
+                    category: t.category || '',
+                  }))}
+                  isZh={isZh}
+                  locale={locale}
+                />
               )}
 
               {/* Quick related tools - card style */}
