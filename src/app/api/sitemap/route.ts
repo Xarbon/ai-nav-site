@@ -52,6 +52,23 @@ export async function GET() {
   xml += '    <priority>0.8</priority>\n';
   xml += '  </url>\n';
   
+  // 最新收录页（中英文）
+  xml += '  <url>\n';
+  xml += '    <loc>' + baseUrl + '/zh/latest</loc>\n';
+  xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/latest"/>\n';
+  xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/latest"/>\n';
+  xml += '    <changefreq>daily</changefreq>\n';
+  xml += '    <priority>0.8</priority>\n';
+  xml += '  </url>\n';
+  
+  xml += '  <url>\n';
+  xml += '    <loc>' + baseUrl + '/en/latest</loc>\n';
+  xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/latest"/>\n';
+  xml += '    <xhtml:link rel="alternate" hreflang="en" href="' + baseUrl + '/en/latest"/>\n';
+  xml += '    <changefreq>daily</changefreq>\n';
+  xml += '    <priority>0.8</priority>\n';
+  xml += '  </url>\n';
+  
   // 分类页（中英文）
   const categories = [
     'ecommerce', 'content_creation', 'cross_border_opc', 'quant_trading',
@@ -89,7 +106,6 @@ export async function GET() {
   
   // 工具详情页（中英文）+ Alternatives 页面（中英文）
   for (const tool of tools) {
-    // 工具详情页
     xml += '  <url>\n';
     xml += '    <loc>' + baseUrl + '/zh/tool/' + tool.slug + '</loc>\n';
     xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/tool/' + tool.slug + '"/>\n';
@@ -106,7 +122,6 @@ export async function GET() {
     xml += '    <priority>0.6</priority>\n';
     xml += '  </url>\n';
     
-    // Alternatives 页面（pSEO）
     xml += '  <url>\n';
     xml += '    <loc>' + baseUrl + '/zh/alternatives/' + tool.slug + '</loc>\n';
     xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/alternatives/' + tool.slug + '"/>\n';
@@ -124,8 +139,7 @@ export async function GET() {
     xml += '  </url>\n';
   }
   
-  // Compare 页面（VS 对比页 pSEO）
-  // 每个分类取前 8 个工具，生成两两对比组合
+  // Compare 页面（每分类 Top 10 两两对比）
   const comparePairs = new Set<string>();
   for (const cat of Object.keys(toolsByCategory)) {
     const catTools = toolsByCategory[cat].slice(0, 10);
@@ -139,7 +153,6 @@ export async function GET() {
   
   for (const pair of comparePairs) {
     const [slugA, slugB] = pair.split('_');
-    // 中文对比页
     xml += '  <url>\n';
     xml += '    <loc>' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '</loc>\n';
     xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '"/>\n';
@@ -148,7 +161,6 @@ export async function GET() {
     xml += '    <priority>0.4</priority>\n';
     xml += '  </url>\n';
     
-    // 英文对比页
     xml += '  <url>\n';
     xml += '    <loc>' + baseUrl + '/en/compare/' + slugA + '/' + slugB + '</loc>\n';
     xml += '    <xhtml:link rel="alternate" hreflang="zh" href="' + baseUrl + '/zh/compare/' + slugA + '/' + slugB + '"/>\n';
