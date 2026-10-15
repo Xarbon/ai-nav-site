@@ -72,6 +72,14 @@ export function MobileMenu({isZh}: Props) {
             >
               {isZh ? '搜索' : 'Search'}
             </Link>
+            <Link
+              href={`/${isZh ? "zh" : "en"}/latest`}
+              onClick={() => setIsOpen(false)}
+              className="block py-3 px-4 rounded-lg hover:bg-[var(--bg-hover)] font-medium"
+              style={{color: 'var(--text-title)'}}
+            >
+              {isZh ? '🆕 最新收录' : '🆕 Latest'}
+            </Link>
           </div>
 
           <div>
