@@ -29,13 +29,37 @@ export function Navbar({ locale: serverLocale }: NavbarProps = {}) {
     window.location.href = newPath;
   };
 
+  const isLatestActive = pathWithoutLocale === '/latest';
+  const isSearchActive = pathWithoutLocale === '/search';
+
   return (
     <header className="h-16 border-b border-[var(--border-color)] bg-white flex items-center px-6 sticky top-0 z-50">
       <div className="flex items-center justify-between w-full max-w-[1440px] mx-auto">
-        {/* Logo */}
-        <Link href={isZh ? '/zh' : '/en'} className="flex items-center gap-3 shrink-0">
-          <img src="/logo-full.svg" alt="aiqury.com" className="h-9 w-auto" />
-        </Link>
+        {/* Left: Logo + Navigation links */}
+        <div className="flex items-center gap-6">
+          {/* Logo */}
+          <Link href={isZh ? '/zh' : '/en'} className="flex items-center shrink-0">
+            <img src="/logo-full.svg" alt="aiqury.com" className="h-9 w-auto" />
+          </Link>
+
+          {/* Nav links */}
+          <nav className="hidden md:flex items-center gap-1">
+            <Link
+              href={isZh ? '/zh/latest' : '/en/latest'}
+              className={`px-3 py-1.5 rounded-full text-sm transition ${isLatestActive ? 'bg-blue-50 font-medium' : 'hover:bg-[var(--bg-hover)]'}`}
+              style={{ color: isLatestActive ? '#165DFF' : 'var(--text-body)' }}
+            >
+              {isZh ? '最新收录' : 'Latest'}
+            </Link>
+            <Link
+              href={isZh ? '/zh/search' : '/en/search'}
+              className={`px-3 py-1.5 rounded-full text-sm transition ${isSearchActive ? 'bg-blue-50 font-medium' : 'hover:bg-[var(--bg-hover)]'}`}
+              style={{ color: isSearchActive ? '#165DFF' : 'var(--text-body)' }}
+            >
+              {isZh ? 'AI搜索' : 'AI Search'}
+            </Link>
+          </nav>
+        </div>
 
         {/* Right */}
         <div className="flex items-center gap-3">
